@@ -1,0 +1,3 @@
+# Configuration of Plugins
+# You can insert Guice modules with comma seperated
+module.classes=DprsMavenOldToNewPluginModule
