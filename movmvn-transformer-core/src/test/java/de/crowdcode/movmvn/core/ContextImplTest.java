@@ -35,33 +35,33 @@ public class ContextImplTest {
 	public void testGetProjectName() {
 		Context context = new ContextImpl();
 		context.setProjectWorkDirectory("target/tmp");
-		context.setZipFile("src/test/resources/de/crowdcode/antmvntransf/cli/testantproject/oaw_integration.zip");
+		context.setZipFile("src/test/resources/de/crowdcode/movmvn/cli/testantproject/extra-dataplugin.zip");
 
 		String projectName = context.getProjectName();
-		assertEquals("oaw_integration", projectName);
+		assertEquals("extra-dataplugin", projectName);
 
-		context.setZipFile("D:\\LDaten\\git\\antmvntransf\\antmvn-transformer-cli\\src\\test\\resources\\de\\crowdcode\\antmvntransf\\cli\\testantproject\\oaw_integration.zip");
+		context.setZipFile("D:\\LDaten\\git\\antmvntransf\\antmvn-transformer-cli\\src\\test\\resources\\de\\crowdcode\\movmvn\\cli\\testantproject\\extra-dataplugin.zip");
 		projectName = context.getProjectName();
-		assertEquals("oaw_integration", projectName);
+		assertEquals("extra-dataplugin", projectName);
 	}
 
 	@Test
 	public void testGetProjectSourceName() {
 		Context context = new ContextImpl();
 		context.setProjectWorkDirectory("target/tmp");
-		context.setZipFile("src/test/resources/de/crowdcode/antmvntransf/cli/testantproject/oaw_integration.zip");
+		context.setZipFile("src/test/resources/de/crowdcode/movmvn/cli/testantproject/extra-dataplugin.zip");
 
 		String projectSourceName = context.getProjectSourceName();
-		assertEquals("target/tmp/oaw_integration", projectSourceName);
+		assertEquals("target/tmp/extra-dataplugin", projectSourceName);
 	}
 
 	@Test
 	public void testGetProjectTargetName() {
 		Context context = new ContextImpl();
 		context.setProjectWorkDirectory("target/tmp");
-		context.setZipFile("src/test/resources/de/crowdcode/antmvntransf/cli/testantproject/oaw_integration.zip");
+		context.setZipFile("src/test/resources/de/crowdcode/movmvn/cli/testantproject/extra-dataplugin.zip");
 
 		String projectTargetName = context.getProjectTargetName();
-		assertEquals("target/tmp/target/oaw_integration", projectTargetName);
+		assertEquals("target/tmp/target/extra-dataplugin", projectTargetName);
 	}
 }

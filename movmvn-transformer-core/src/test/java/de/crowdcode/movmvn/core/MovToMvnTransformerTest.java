@@ -60,7 +60,7 @@ public class MovToMvnTransformerTest {
 		try {
 			Context context = new ContextImpl();
 			context.setProjectWorkDirectory("target/tmp");
-			context.setZipFile("src/test/resources/de/crowdcode/antmvntransf/cli/testantproject/extra-dataplugin.zip");
+			context.setZipFile("src/test/resources/de/crowdcode/movmvn/cli/testantproject/extra-dataplugin.zip");
 			antToMvnTransformer.setContext(context);
 
 			Set<Plugin> plugins = new HashSet<Plugin>();
