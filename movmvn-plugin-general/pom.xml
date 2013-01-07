@@ -24,7 +24,7 @@
 	<parent>
 		<groupId>de.crowdcode.movmvn</groupId>
 		<artifactId>movmvn-parent</artifactId>
-		<version>1.0.0</version>
+		<version>1.0.0-SNAPSHOT</version>
 		<relativePath>../movmvn-parent/pom.xml</relativePath>
 	</parent>
 	
