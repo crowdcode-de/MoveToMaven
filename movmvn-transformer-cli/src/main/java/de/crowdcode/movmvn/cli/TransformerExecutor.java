@@ -50,7 +50,7 @@ public class TransformerExecutor {
 		// Input: the project working directory
 		String zipFile = args[0];
 		String projectWorkDirectory = args[1];
-		log.info("Ant To Maven Transformer - ZIP file: " + zipFile + " - "
+		log.info("Move To Maven Transformer - ZIP file: " + zipFile + " - "
 				+ "Project working directory: " + projectWorkDirectory);
 
 		TransformerHelper transformerHelper = new TransformerHelper();
