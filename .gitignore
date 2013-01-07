@@ -1,5 +1,13 @@
 *.class
-
+/target
+/bin
+/.settings
+.classpath
+.project
+.idea
+*.iml
+pom.xml.*
+release.properties
 # Package Files #
 *.jar
 *.war
