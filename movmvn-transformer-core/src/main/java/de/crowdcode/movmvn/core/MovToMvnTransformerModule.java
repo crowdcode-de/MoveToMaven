@@ -7,7 +7,7 @@ import com.google.inject.AbstractModule;
  * 
  * @author lofi
  */
-public class AntToMvnTransformerModule extends AbstractModule {
+public class MovToMvnTransformerModule extends AbstractModule {
 
 	@Override
 	protected void configure() {

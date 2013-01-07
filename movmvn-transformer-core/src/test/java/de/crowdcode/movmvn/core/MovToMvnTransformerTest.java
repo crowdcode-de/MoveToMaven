@@ -20,7 +20,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import de.crowdcode.movmvn.core.AntToMvnTransformer;
+import de.crowdcode.movmvn.core.MovToMvnTransformer;
 import de.crowdcode.movmvn.core.Context;
 import de.crowdcode.movmvn.core.ContextImpl;
 import de.crowdcode.movmvn.core.Plugin;
@@ -32,7 +32,7 @@ import de.crowdcode.movmvn.core.Unzipper;
  * @author lofi
  */
 @RunWith(MockitoJUnitRunner.class)
-public class AntToMvnTransformerTest {
+public class MovToMvnTransformerTest {
 
 	@Mock
 	private Plugin mockPlugin;
@@ -41,7 +41,7 @@ public class AntToMvnTransformerTest {
 	private Unzipper mockUnzipper;
 
 	@InjectMocks
-	private AntToMvnTransformer antToMvnTransformer;
+	private MovToMvnTransformer antToMvnTransformer;
 
 	@Test
 	public void testExecute() {

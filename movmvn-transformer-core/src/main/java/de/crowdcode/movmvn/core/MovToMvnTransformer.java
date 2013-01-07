@@ -12,7 +12,7 @@ import javax.xml.transform.TransformerException;
  * 
  * @author lofi
  */
-public class AntToMvnTransformer {
+public class MovToMvnTransformer {
 
 	@Inject
 	private Set<Plugin> plugins;

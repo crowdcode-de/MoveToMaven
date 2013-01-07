@@ -12,8 +12,8 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
 
-import de.crowdcode.movmvn.core.AntToMvnTransformer;
-import de.crowdcode.movmvn.core.AntToMvnTransformerModule;
+import de.crowdcode.movmvn.core.MovToMvnTransformer;
+import de.crowdcode.movmvn.core.MovToMvnTransformerModule;
 import de.crowdcode.movmvn.core.Context;
 import de.crowdcode.movmvn.plugin.general.GeneralPluginModule;
 
@@ -47,12 +47,12 @@ public class TransformerExecutor {
 				.createModules(moduleItems);
 
 		// Create injectors for the transformer and all the plugins!
-		moduleObjects.add(new AntToMvnTransformerModule());
+		moduleObjects.add(new MovToMvnTransformerModule());
 		moduleObjects.add(new GeneralPluginModule());
 		Injector injector = Guice.createInjector(moduleObjects);
 
-		AntToMvnTransformer antToMvnTransformer = injector
-				.getInstance(AntToMvnTransformer.class);
+		MovToMvnTransformer antToMvnTransformer = injector
+				.getInstance(MovToMvnTransformer.class);
 
 		// TODO Instead we need to make singleton for the context object
 		Context context = antToMvnTransformer.getContext();
