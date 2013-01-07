@@ -10,3 +10,6 @@ Some tricks:
 * If you want to read and write Maven pom.xml file use the Maven model like this: http://goo.gl/n2CuG 
 
 Our current build status at BuildHive CloudBees: [![Build Status](https://buildhive.cloudbees.com/job/crowdcode-de/job/MoveToMaven/badge/icon)](https://buildhive.cloudbees.com/job/crowdcode-de/job/MoveToMaven/)
+
+Have fun!
+Lofi.
