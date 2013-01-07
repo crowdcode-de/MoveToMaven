@@ -12,4 +12,4 @@ Some tricks:
 Our current build status at BuildHive CloudBees: [![Build Status](https://buildhive.cloudbees.com/job/crowdcode-de/job/MoveToMaven/badge/icon)](https://buildhive.cloudbees.com/job/crowdcode-de/job/MoveToMaven/)
 
 Have fun!
-Lofi.
+[Lofi](http://lofidewanto.blogspot.com)
