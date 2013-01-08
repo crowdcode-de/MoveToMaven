@@ -83,7 +83,8 @@ public class MovToMvnTransformer {
 					"We cannot unzip, so we need to stop: " + e.getStackTrace());
 		}
 
-		// TODO Sort the plugins
+		// Sort the plugins
+		sortPlugins();
 
 		// Go through all plugins and execute them one by one...
 		for (Plugin plugin : plugins) {
@@ -94,11 +95,17 @@ public class MovToMvnTransformer {
 		zip();
 	}
 
+	private void sortPlugins() {
+		// TODO Sort the plugins after getExecutionOrderedNumber
+
+	}
+
 	/**
 	 * Execute the transformer.
 	 */
 	public void executeDirProject() throws TransformerException {
-		// TODO Sort the plugins
+		// Sort the plugins
+		sortPlugins();
 
 		// Go through all plugins and execute them one by one...
 		for (Plugin plugin : plugins) {
@@ -110,7 +117,8 @@ public class MovToMvnTransformer {
 	 * Execute the transformer.
 	 */
 	public void executeDirProjectGroup() throws TransformerException {
-		// TODO Sort the plugins
+		// Sort the plugins
+		sortPlugins();
 
 		// Go through all plugins and execute them one by one...
 		for (Plugin plugin : plugins) {
