@@ -75,74 +75,89 @@ public class TransformerExecutor {
 				.getInstance(MovToMvnTransformer.class);
 
 		if (args[0].equals("-zip")) {
-			// Input: the zip file of the project
-			// Input: the project working directory
-			String zipFile = args[1];
-			String projectWorkDirectory = args[2];
-			log.info("Move To Maven Transformer - ZIP file: " + zipFile + " - "
-					+ "Project working directory: " + projectWorkDirectory);
-
-			// Get the injected context object
-			Context context = movToMvnTransformer.getContext();
-			context.setProjectWorkDirectory(projectWorkDirectory);
-			context.setZipFile(zipFile);
-			log.info("Project name: " + context.getProjectName());
-			log.info("Project sourcename: " + context.getProjectSourceName());
-			log.info("Project targetname: " + context.getProjectTargetName());
-
-			try {
-				movToMvnTransformer.executeZip();
-			} catch (TransformerException e) {
-				log.log(Level.SEVERE, e.getLocalizedMessage(), e);
-			}
+			executeWithZip(args, movToMvnTransformer);
 		} else if (args[0].equals("-dirProject")) {
-			// Input: the dir of the project - ONLY ONE project
-			// Input: the project working directory
-			String dir = args[1];
-			String projectWorkDirectory = args[2];
-			log.info("Move To Maven Transformer - Project Directory: " + dir
-					+ " - " + "Project working directory: "
-					+ projectWorkDirectory);
-
-			// Get the injected context object
-			Context context = movToMvnTransformer.getContext();
-			context.setProjectWorkDirectory(projectWorkDirectory);
-			context.setDirectory(dir);
-			log.info("Project name: " + context.getProjectName());
-			log.info("Project sourcename: " + context.getProjectSourceName());
-			log.info("Project targetname: " + context.getProjectTargetName());
-
-			try {
-				movToMvnTransformer.executeDirProject();
-			} catch (TransformerException e) {
-				log.log(Level.SEVERE, e.getLocalizedMessage(), e);
-			}
+			executeWithDirProject(args, movToMvnTransformer);
 		} else if (args[0].equals("-dirProjectGroup")) {
-			// Input: the dir of the projects - MANY projects reside within this
-			// directory
-			// Input: the project working directory
-			String dir = args[1];
-			String projectWorkDirectory = args[2];
-			log.info("Move To Maven Transformer - Projects Group Directory: "
-					+ dir + " - " + "Project working directory: "
-					+ projectWorkDirectory);
-
-			// Get the injected context object
-			Context context = movToMvnTransformer.getContext();
-			context.setProjectWorkDirectory(projectWorkDirectory);
-			context.setDirectory(dir);
-			log.info("Project name: " + context.getProjectName());
-			log.info("Project sourcename: " + context.getProjectSourceName());
-			log.info("Project targetname: " + context.getProjectTargetName());
-
-			try {
-				movToMvnTransformer.executeDirProjectGroup();
-			} catch (TransformerException e) {
-				log.log(Level.SEVERE, e.getLocalizedMessage(), e);
-			}
+			executeWithDirProjectGroup(args, movToMvnTransformer);
 		} else {
 			log.log(Level.SEVERE,
 					"Error: please use following format as an example: movmvn-cli -zip C:/temp/extra-dataplugin.zip C:/temp/result");
+		}
+	}
+
+	private static void executeWithDirProjectGroup(final String[] args,
+			MovToMvnTransformer movToMvnTransformer) {
+		// Input: the dir of the projects - MANY projects reside within this
+		// directory
+		// Input: the project working directory
+		String dir = args[1];
+		String projectWorkDirectory = args[2];
+		log.info("Move To Maven Transformer - Projects Group Directory: "
+				+ dir + " - " + "Project working directory: "
+				+ projectWorkDirectory);
+
+		// Get the injected context object
+		Context context = movToMvnTransformer.getContext();
+		context.setProjectWorkDirectory(projectWorkDirectory);
+		context.setDirectory(dir);
+		log.info("Project name: " + context.getProjectName());
+		log.info("Project sourcename: " + context.getProjectSourceName());
+		log.info("Project targetname: " + context.getProjectTargetName());
+
+		try {
+			movToMvnTransformer.executeDirProjectGroup();
+		} catch (TransformerException e) {
+			log.log(Level.SEVERE, e.getLocalizedMessage(), e);
+		}
+	}
+
+	private static void executeWithDirProject(final String[] args,
+			MovToMvnTransformer movToMvnTransformer) {
+		// Input: the dir of the project - ONLY ONE project
+		// Input: the project working directory
+		String dir = args[1];
+		String projectWorkDirectory = args[2];
+		log.info("Move To Maven Transformer - Project Directory: " + dir
+				+ " - " + "Project working directory: "
+				+ projectWorkDirectory);
+
+		// Get the injected context object
+		Context context = movToMvnTransformer.getContext();
+		context.setProjectWorkDirectory(projectWorkDirectory);
+		context.setDirectory(dir);
+		log.info("Project name: " + context.getProjectName());
+		log.info("Project sourcename: " + context.getProjectSourceName());
+		log.info("Project targetname: " + context.getProjectTargetName());
+
+		try {
+			movToMvnTransformer.executeDirProject();
+		} catch (TransformerException e) {
+			log.log(Level.SEVERE, e.getLocalizedMessage(), e);
+		}
+	}
+
+	private static void executeWithZip(final String[] args,
+			MovToMvnTransformer movToMvnTransformer) {
+		// Input: the zip file of the project
+		// Input: the project working directory
+		String zipFile = args[1];
+		String projectWorkDirectory = args[2];
+		log.info("Move To Maven Transformer - ZIP file: " + zipFile + " - "
+				+ "Project working directory: " + projectWorkDirectory);
+
+		// Get the injected context object
+		Context context = movToMvnTransformer.getContext();
+		context.setProjectWorkDirectory(projectWorkDirectory);
+		context.setZipFile(zipFile);
+		log.info("Project name: " + context.getProjectName());
+		log.info("Project sourcename: " + context.getProjectSourceName());
+		log.info("Project targetname: " + context.getProjectTargetName());
+
+		try {
+			movToMvnTransformer.executeZip();
+		} catch (TransformerException e) {
+			log.log(Level.SEVERE, e.getLocalizedMessage(), e);
 		}
 	}
 }

@@ -37,7 +37,7 @@
 	<modules>
 	    <module>movmvn-parent</module>
 		<module>movmvn-transformer-core</module>
-		<module>movmvn-transformer-cli</module>
 		<module>movmvn-plugin-general</module>
+		<module>movmvn-transformer-cli</module>
 	</modules>
 </project>
