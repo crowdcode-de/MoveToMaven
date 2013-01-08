@@ -18,11 +18,13 @@
  */
 package de.crowdcode.movmvn.core;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import java.io.File;
 import java.io.IOException;
@@ -47,7 +49,13 @@ import org.mockito.runners.MockitoJUnitRunner;
 public class MovToMvnTransformerTest {
 
 	@Mock
-	private Plugin mockPlugin;
+	private AbstractPlugin mockPlugin1;
+
+	@Mock
+	private AbstractPlugin mockPlugin2;
+
+	@Mock
+	private AbstractPlugin mockPlugin3;
 
 	@Mock
 	private Unzipper mockUnzipper;
@@ -64,14 +72,70 @@ public class MovToMvnTransformerTest {
 			antToMvnTransformer.setContext(context);
 
 			Set<Plugin> plugins = new HashSet<Plugin>();
-			plugins.add(mockPlugin);
+			plugins.add(mockPlugin1);
 			antToMvnTransformer.setPlugins(plugins);
 
 			antToMvnTransformer.executeZip();
 
 			verify(mockUnzipper, times(1)).unzipFileToDir(any(File.class),
 					any(File.class));
-			verify(mockPlugin, times(1)).execute(any(Context.class));
+			verify(mockPlugin1, times(1)).execute(any(Context.class));
+		} catch (TransformerException e) {
+			fail("Error happens!");
+			e.printStackTrace();
+		} catch (ZipException e) {
+			fail("Error happens!");
+			e.printStackTrace();
+		} catch (IOException e) {
+			fail("Error happens!");
+			e.printStackTrace();
+		}
+		assertTrue(true);
+	}
+
+	@Test
+	public void testExecuteSortedPlugins() {
+		try {
+			when(mockPlugin1.getName()).thenReturn("mockPlugin1");
+			when(mockPlugin1.getExecutionOrderedNumber()).thenReturn(1);
+			when(mockPlugin1.compareTo(mockPlugin2)).thenReturn(-9);
+			when(mockPlugin1.compareTo(mockPlugin3)).thenReturn(1);
+
+			when(mockPlugin2.getName()).thenReturn("mockPlugin2");
+			when(mockPlugin2.getExecutionOrderedNumber()).thenReturn(10);
+			when(mockPlugin2.compareTo(mockPlugin1)).thenReturn(9);
+			when(mockPlugin2.compareTo(mockPlugin3)).thenReturn(10);
+
+			when(mockPlugin3.getName()).thenReturn("mockPlugin3");
+			when(mockPlugin3.getExecutionOrderedNumber()).thenReturn(0);
+			when(mockPlugin3.compareTo(mockPlugin1)).thenReturn(-1);
+			when(mockPlugin3.compareTo(mockPlugin2)).thenReturn(-10);
+
+			Context context = new ContextImpl();
+			context.setProjectWorkDirectory("target/tmp");
+			context.setZipFile("src/test/resources/de/crowdcode/movmvn/cli/testantproject/extra-dataplugin.zip");
+			antToMvnTransformer.setContext(context);
+
+			Set<Plugin> plugins = new HashSet<Plugin>();
+			plugins.add(mockPlugin2);
+			plugins.add(mockPlugin1);
+			plugins.add(mockPlugin3);
+			antToMvnTransformer.setPlugins(plugins);
+
+			antToMvnTransformer.executeZip();
+
+			verify(mockUnzipper, times(1)).unzipFileToDir(any(File.class),
+					any(File.class));
+			verify(mockPlugin1, times(1)).execute(any(Context.class));
+			verify(mockPlugin2, times(1)).execute(any(Context.class));
+			verify(mockPlugin3, times(1)).execute(any(Context.class));
+
+			// Verify the sorted plugins
+			Plugin[] pluginArray = antToMvnTransformer.getSortedPlugins();
+
+			assertEquals("mockPlugin3", pluginArray[0].getName());
+			assertEquals("mockPlugin1", pluginArray[1].getName());
+			assertEquals("mockPlugin2", pluginArray[2].getName());
 		} catch (TransformerException e) {
 			fail("Error happens!");
 			e.printStackTrace();

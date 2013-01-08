@@ -45,6 +45,15 @@ public class MovToMvnTransformer {
 	private Plugin[] sortedPlugins;
 
 	/**
+	 * Get the sorted plugins.
+	 * 
+	 * @return sorted plugins
+	 */
+	public Plugin[] getSortedPlugins() {
+		return sortedPlugins;
+	}
+
+	/**
 	 * Get the context information.
 	 * 
 	 * @return Context
