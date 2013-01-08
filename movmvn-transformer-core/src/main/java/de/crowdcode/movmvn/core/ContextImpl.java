@@ -33,6 +33,7 @@ public class ContextImpl implements Context {
 			.getName());
 	private String projectWorkDirectory;
 	private String zipFile;
+	private String directory;
 
 	/**
 	 * {@inheritDoc}
@@ -79,13 +80,23 @@ public class ContextImpl implements Context {
 	 */
 	@Override
 	public String getProjectName() {
-		String nameWithoutZip = StringUtils.substringBefore(zipFile, ".zip");
-		String nameResult = StringUtils.substringAfterLast(nameWithoutZip, "/");
-		if (nameResult.equals("")) {
-			// We have no "/" instead "\\"
-			nameResult = StringUtils.substringAfterLast(nameWithoutZip, "\\");
+		if (zipFile != null && !zipFile.equals("")) {
+			String nameWithoutZip = StringUtils
+					.substringBefore(zipFile, ".zip");
+			String nameResult = StringUtils.substringAfterLast(nameWithoutZip,
+					"/");
+			if (nameResult.equals("")) {
+				// We have no "/" instead "\\"
+				nameResult = StringUtils.substringAfterLast(nameWithoutZip,
+						"\\");
+			}
+			return nameResult;
+		} else if (directory != null && !directory.equals("")) {
+			String nameResult = StringUtils.substringAfterLast(directory, "/");
+			return nameResult;
+		} else {
+			return "";
 		}
-		return nameResult;
 	}
 
 	/**
@@ -106,5 +117,21 @@ public class ContextImpl implements Context {
 		String resultName = projectWorkDirectory.concat("/target/").concat(
 				getProjectName());
 		return resultName;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setDirectory(final String directory) {
+		this.directory = directory;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getDirectory() {
+		return this.directory;
 	}
 }

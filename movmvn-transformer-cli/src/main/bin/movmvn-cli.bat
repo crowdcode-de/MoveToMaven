@@ -51,7 +51,6 @@ set _JAVA="%JRE_HOME%\bin\java"
 set HEAP_MS=-Xms512m
 set HEAP_MX=-Xmx1024m
 if "%JAVA_OPTS%" == "" set JAVA_OPTS=%HEAP_MS% %HEAP_MX%
-if "%LOGFILEPATH%" == "" set LOGFILEPATH=..\logs
 
 rem call Java
 %_JAVA% %JAVA_OPTS% -classpath %MOVMVN_HOME%\conf\*;%MOVMVN_HOME%\lib\* de.crowdcode.movmvn.cli.TransformerExecutor %1

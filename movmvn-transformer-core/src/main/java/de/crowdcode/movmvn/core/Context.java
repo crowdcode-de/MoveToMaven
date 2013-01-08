@@ -54,7 +54,7 @@ public interface Context {
 	 * Set the Ant zip file project to be worked with.
 	 * 
 	 * @param zipFile
-	 *            the zi
+	 *            the zip
 	 */
 	public void setZipFile(String zipFile);
 
@@ -64,6 +64,21 @@ public interface Context {
 	 * @return the zip file with its complete directory
 	 */
 	public String getZipFile();
+
+	/**
+	 * Set the directory project to be worked with.
+	 * 
+	 * @param directory
+	 *            the directory
+	 */
+	public void setDirectory(String directory);
+
+	/**
+	 * Get the directory project.
+	 * 
+	 * @return the directory with its complete directory
+	 */
+	public String getDirectory();
 
 	/**
 	 * Get the project name.
