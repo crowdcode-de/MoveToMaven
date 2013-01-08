@@ -67,7 +67,7 @@ public class MovToMvnTransformerTest {
 			plugins.add(mockPlugin);
 			antToMvnTransformer.setPlugins(plugins);
 
-			antToMvnTransformer.execute();
+			antToMvnTransformer.executeZip();
 
 			verify(mockUnzipper, times(1)).unzipFileToDir(any(File.class),
 					any(File.class));

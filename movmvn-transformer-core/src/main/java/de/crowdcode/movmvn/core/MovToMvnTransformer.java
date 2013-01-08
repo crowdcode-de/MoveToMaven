@@ -73,7 +73,7 @@ public class MovToMvnTransformer {
 	/**
 	 * Execute the transformer.
 	 */
-	public void execute() throws TransformerException {
+	public void executeZip() throws TransformerException {
 		// Unzip the zip project file to the working dir
 		try {
 			unzip();
@@ -95,10 +95,34 @@ public class MovToMvnTransformer {
 	}
 
 	/**
+	 * Execute the transformer.
+	 */
+	public void executeDirProject() throws TransformerException {
+		// TODO Sort the plugins
+
+		// Go through all plugins and execute them one by one...
+		for (Plugin plugin : plugins) {
+			plugin.execute(context);
+		}
+	}
+
+	/**
+	 * Execute the transformer.
+	 */
+	public void executeDirProjectGroup() throws TransformerException {
+		// TODO Sort the plugins
+
+		// Go through all plugins and execute them one by one...
+		for (Plugin plugin : plugins) {
+			plugin.execute(context);
+		}
+	}
+
+	/**
 	 * Zip the file.
 	 */
 	private void zip() {
-		// TODO Auto-generated method stub
+		// TODO Implement zip method
 
 	}
 

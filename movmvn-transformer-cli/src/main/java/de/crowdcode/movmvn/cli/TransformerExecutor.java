@@ -46,16 +46,15 @@ public class TransformerExecutor {
 			.getLogger(TransformerExecutor.class.getName());
 
 	/**
-	 * Main parameters.
+	 * Main method.
 	 * 
 	 * @param args
-	 *            arg[0] = -zip or -dir
-	 * @param args
-	 *            arg [1] = zip or directory name
-	 * @param args
-	 *            arg[2] = working directory
+	 *            arguments for CLI.
 	 */
 	public static void main(final String[] args) {
+		// Parameter arg[0] = -zip or -dirProject or -dirProjectGroup
+		// Parameter arg[1] = zip or directory name
+		// Parameter arg[2] = working directory
 		TransformerHelper transformerHelper = new TransformerHelper();
 
 		// Get all Guice modules in config
@@ -83,7 +82,7 @@ public class TransformerExecutor {
 			log.info("Move To Maven Transformer - ZIP file: " + zipFile + " - "
 					+ "Project working directory: " + projectWorkDirectory);
 
-			// TODO Instead we need to make singleton for the context object
+			// Get the injected context object
 			Context context = movToMvnTransformer.getContext();
 			context.setProjectWorkDirectory(projectWorkDirectory);
 			context.setZipFile(zipFile);
@@ -92,28 +91,52 @@ public class TransformerExecutor {
 			log.info("Project targetname: " + context.getProjectTargetName());
 
 			try {
-				movToMvnTransformer.execute();
+				movToMvnTransformer.executeZip();
 			} catch (TransformerException e) {
 				log.log(Level.SEVERE, e.getLocalizedMessage(), e);
 			}
-		} else if (args[0].equals("-dir")) {
-			// Input: the dir of the project
+		} else if (args[0].equals("-dirProject")) {
+			// Input: the dir of the project - ONLY ONE project
 			// Input: the project working directory
 			String dir = args[1];
 			String projectWorkDirectory = args[2];
-			log.info("Move To Maven Transformer - Directory: " + dir + " - "
-					+ "Project working directory: " + projectWorkDirectory);
+			log.info("Move To Maven Transformer - Project Directory: " + dir
+					+ " - " + "Project working directory: "
+					+ projectWorkDirectory);
 
-			// TODO Instead we need to make singleton for the context object
+			// Get the injected context object
 			Context context = movToMvnTransformer.getContext();
 			context.setProjectWorkDirectory(projectWorkDirectory);
-			// context.setDir(dir);
+			context.setDirectory(dir);
 			log.info("Project name: " + context.getProjectName());
 			log.info("Project sourcename: " + context.getProjectSourceName());
 			log.info("Project targetname: " + context.getProjectTargetName());
 
 			try {
-				movToMvnTransformer.execute();
+				movToMvnTransformer.executeDirProject();
+			} catch (TransformerException e) {
+				log.log(Level.SEVERE, e.getLocalizedMessage(), e);
+			}
+		} else if (args[0].equals("-dirProjectGroup")) {
+			// Input: the dir of the projects - MANY projects reside within this
+			// directory
+			// Input: the project working directory
+			String dir = args[1];
+			String projectWorkDirectory = args[2];
+			log.info("Move To Maven Transformer - Projects Group Directory: "
+					+ dir + " - " + "Project working directory: "
+					+ projectWorkDirectory);
+
+			// Get the injected context object
+			Context context = movToMvnTransformer.getContext();
+			context.setProjectWorkDirectory(projectWorkDirectory);
+			context.setDirectory(dir);
+			log.info("Project name: " + context.getProjectName());
+			log.info("Project sourcename: " + context.getProjectSourceName());
+			log.info("Project targetname: " + context.getProjectTargetName());
+
+			try {
+				movToMvnTransformer.executeDirProjectGroup();
 			} catch (TransformerException e) {
 				log.log(Level.SEVERE, e.getLocalizedMessage(), e);
 			}
