@@ -31,18 +31,20 @@ public class TransformerExecutorTest {
 
 	@Test
 	public void testProjectExtraDataPlugin() {
-		String[] args = new String[2];
-		args[0] = "src/test/resources/de/crowdcode/movmvn/cli/testantproject/extra-dataplugin.zip";
-		args[1] = "target/tmp";
+		String[] args = new String[3];
+		args[0] = "-zip";
+		args[1] = "src/test/resources/de/crowdcode/movmvn/cli/testantproject/extra-dataplugin.zip";
+		args[2] = "target/tmp";
 		TransformerExecutor.main(args);
 		assertTrue(true);
 	}
 
 	@Test
 	public void testProjectExtraProfiling() {
-		String[] args = new String[2];
-		args[0] = "src/test/resources/de/crowdcode/movmvn/cli/testantproject/extra-profiling.zip";
-		args[1] = "target/tmp";
+		String[] args = new String[3];
+		args[0] = "-zip";
+		args[1] = "src/test/resources/de/crowdcode/movmvn/cli/testantproject/extra-profiling.zip";
+		args[2] = "target/tmp";
 		TransformerExecutor.main(args);
 		assertTrue(true);
 	}

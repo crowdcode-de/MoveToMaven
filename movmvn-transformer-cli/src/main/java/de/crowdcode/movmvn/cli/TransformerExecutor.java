@@ -45,46 +45,58 @@ public class TransformerExecutor {
 	private static final Logger log = Logger
 			.getLogger(TransformerExecutor.class.getName());
 
+	/**
+	 * Main parameters.
+	 * 
+	 * @param args
+	 *            arg[0] = -zip or -dir
+	 * @param args
+	 *            arg [1] = zip or directory name
+	 * @param args
+	 *            arg[2] = working directory
+	 */
 	public static void main(final String[] args) {
-		// Input: the zip file of the Ant project
-		// Input: the project working directory
-		String zipFile = args[0];
-		String projectWorkDirectory = args[1];
-		log.info("Move To Maven Transformer - ZIP file: " + zipFile + " - "
-				+ "Project working directory: " + projectWorkDirectory);
+		if (args[0].equals("-zip")) {
+			// Input: the zip file of the Ant project
+			// Input: the project working directory
+			String zipFile = args[1];
+			String projectWorkDirectory = args[2];
+			log.info("Move To Maven Transformer - ZIP file: " + zipFile + " - "
+					+ "Project working directory: " + projectWorkDirectory);
 
-		TransformerHelper transformerHelper = new TransformerHelper();
+			TransformerHelper transformerHelper = new TransformerHelper();
 
-		// Get all Guice modules in config
-		Properties properties = transformerHelper.loadProperties();
-		String modules = properties.getProperty("module.classes");
-		List<String> moduleItems = transformerHelper.getModuleItems(modules);
+			// Get all Guice modules in config
+			Properties properties = transformerHelper.loadProperties();
+			String modules = properties.getProperty("module.classes");
+			List<String> moduleItems = transformerHelper
+					.getModuleItems(modules);
 
-		// Create all the plugin classes
-		Set<Module> moduleObjects = transformerHelper
-				.createModules(moduleItems);
+			// Create all the plugin classes
+			Set<Module> moduleObjects = transformerHelper
+					.createModules(moduleItems);
 
-		// Create injectors for the transformer and all the plugins!
-		moduleObjects.add(new MovToMvnTransformerModule());
-		moduleObjects.add(new GeneralPluginModule());
-		Injector injector = Guice.createInjector(moduleObjects);
+			// Create injectors for the transformer and all the plugins!
+			moduleObjects.add(new MovToMvnTransformerModule());
+			moduleObjects.add(new GeneralPluginModule());
+			Injector injector = Guice.createInjector(moduleObjects);
 
-		MovToMvnTransformer antToMvnTransformer = injector
-				.getInstance(MovToMvnTransformer.class);
+			MovToMvnTransformer antToMvnTransformer = injector
+					.getInstance(MovToMvnTransformer.class);
 
-		// TODO Instead we need to make singleton for the context object
-		Context context = antToMvnTransformer.getContext();
-		context.setProjectWorkDirectory(projectWorkDirectory);
-		context.setZipFile(zipFile);
-		log.info("Project name: " + context.getProjectName());
-		log.info("Project sourcename: " + context.getProjectSourceName());
-		log.info("Project targetname: " + context.getProjectTargetName());
+			// TODO Instead we need to make singleton for the context object
+			Context context = antToMvnTransformer.getContext();
+			context.setProjectWorkDirectory(projectWorkDirectory);
+			context.setZipFile(zipFile);
+			log.info("Project name: " + context.getProjectName());
+			log.info("Project sourcename: " + context.getProjectSourceName());
+			log.info("Project targetname: " + context.getProjectTargetName());
 
-		try {
-			antToMvnTransformer.execute();
-		} catch (TransformerException e) {
-			log.log(Level.SEVERE, e.getLocalizedMessage(), e);
+			try {
+				antToMvnTransformer.execute();
+			} catch (TransformerException e) {
+				log.log(Level.SEVERE, e.getLocalizedMessage(), e);
+			}
 		}
 	}
-
 }
