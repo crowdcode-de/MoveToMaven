@@ -126,7 +126,7 @@ public class MovToMvnTransformer {
 
 		// Go through all plugins and execute them one by one...
 		for (Plugin plugin : sortedPlugins) {
-			plugin.execute(context);
+			plugin.execute(context, true);
 		}
 	}
 

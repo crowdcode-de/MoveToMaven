@@ -31,7 +31,18 @@ public interface Plugin {
 	 * @param context
 	 *            context information for the plugin
 	 */
-	public void execute(Context context);
+	public void execute(final Context context);
+
+	/**
+	 * Execute the plugin.
+	 * 
+	 * @param context
+	 *            context information for the plugin
+	 * @param isProjectGroup
+	 *            projectGroup means that there are many projects within the
+	 *            directory
+	 */
+	public void execute(final Context context, final boolean isProjectGroup);
 
 	/**
 	 * Get the name of the plugin.

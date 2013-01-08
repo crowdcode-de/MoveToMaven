@@ -30,11 +30,10 @@ import de.crowdcode.movmvn.core.Plugin;
  */
 public class GeneralPluginModule extends AbstractModule {
 
-	protected Multibinder<Plugin> plugin;
-
 	@Override
 	protected void configure() {
-		plugin = Multibinder.newSetBinder(binder(), Plugin.class);
+		Multibinder<Plugin> plugin = Multibinder.newSetBinder(binder(),
+				Plugin.class);
 		plugin.addBinding().to(GeneralPlugin.class);
 	}
 }

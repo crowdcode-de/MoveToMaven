@@ -25,6 +25,15 @@ package de.crowdcode.movmvn.core;
  */
 public abstract class AbstractPlugin implements Plugin, Comparable<Plugin> {
 
+	protected boolean isProjectGroup;
+
+	@Override
+	public void execute(Context context, boolean isProjectGroup) {
+		// This method is NOT a must (optional) to to implement!
+		// Therefore we offer an empty implementation
+		this.isProjectGroup = isProjectGroup;
+	}
+
 	@Override
 	public int compareTo(Plugin plugin) {
 		int compareExecutionOrderedNumber = plugin.getExecutionOrderedNumber();
