@@ -54,7 +54,7 @@ if "%JAVA_OPTS%" == "" set JAVA_OPTS=%HEAP_MS% %HEAP_MX%
 if "%LOGFILEPATH%" == "" set LOGFILEPATH=..\logs
 
 rem call Java
-%_JAVA% %JAVA_OPTS% -classpath %MOVMVN_HOME%\lib\* de.crowdcode.movmvn.cli.TransformerExecutor %1
+%_JAVA% %JAVA_OPTS% -classpath %MOVMVN_HOME%\conf\*;%MOVMVN_HOME%\lib\* de.crowdcode.movmvn.cli.TransformerExecutor %1
 goto end
 
 :exit
