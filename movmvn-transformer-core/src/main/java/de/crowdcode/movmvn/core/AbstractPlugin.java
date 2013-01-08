@@ -16,35 +16,18 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package de.crowdcode.movmvn.plugin;
-
-import java.util.logging.Logger;
-
-import de.crowdcode.movmvn.core.AbstractPlugin;
-import de.crowdcode.movmvn.core.Context;
+package de.crowdcode.movmvn.core;
 
 /**
- * Dummy Plugin.
+ * Abstract class for Plugin.
  * 
  * @author lofi
  */
-public class DummyPlugin extends AbstractPlugin {
-
-	private static final Logger log = Logger.getLogger(DummyPlugin.class
-			.getName());
+public abstract class AbstractPlugin implements Plugin, Comparable<Plugin> {
 
 	@Override
-	public void execute(Context context) {
-		log.info("Execute Dummy Plugin...");
-	}
-
-	@Override
-	public String getName() {
-		return "DummyPlugin";
-	}
-
-	@Override
-	public int getExecutionOrderedNumber() {
-		return 100;
+	public int compareTo(Plugin plugin) {
+		int compareExecutionOrderedNumber = plugin.getExecutionOrderedNumber();
+		return this.getExecutionOrderedNumber() - compareExecutionOrderedNumber;
 	}
 }

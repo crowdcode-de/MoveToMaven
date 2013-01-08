@@ -40,15 +40,15 @@ import org.apache.commons.lang3.StringUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import de.crowdcode.movmvn.core.AbstractPlugin;
 import de.crowdcode.movmvn.core.Context;
-import de.crowdcode.movmvn.core.Plugin;
 
 /**
  * General plugin for Ant Maven transformer.
  * 
  * @author lofi
  */
-public class GeneralPlugin implements Plugin {
+public class GeneralPlugin extends AbstractPlugin {
 
 	private Context context;
 

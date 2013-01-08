@@ -20,6 +20,7 @@ package de.crowdcode.movmvn.core;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Set;
 
 import javax.inject.Inject;
@@ -40,6 +41,8 @@ public class MovToMvnTransformer {
 
 	@Inject
 	private Unzipper unzipper;
+
+	private Plugin[] sortedPlugins;
 
 	/**
 	 * Get the context information.
@@ -83,11 +86,10 @@ public class MovToMvnTransformer {
 					"We cannot unzip, so we need to stop: " + e.getStackTrace());
 		}
 
-		// Sort the plugins
 		sortPlugins();
 
 		// Go through all plugins and execute them one by one...
-		for (Plugin plugin : plugins) {
+		for (Plugin plugin : sortedPlugins) {
 			plugin.execute(context);
 		}
 
@@ -95,20 +97,14 @@ public class MovToMvnTransformer {
 		zip();
 	}
 
-	private void sortPlugins() {
-		// TODO Sort the plugins after getExecutionOrderedNumber
-
-	}
-
 	/**
 	 * Execute the transformer.
 	 */
 	public void executeDirProject() throws TransformerException {
-		// Sort the plugins
 		sortPlugins();
 
 		// Go through all plugins and execute them one by one...
-		for (Plugin plugin : plugins) {
+		for (Plugin plugin : sortedPlugins) {
 			plugin.execute(context);
 		}
 	}
@@ -117,11 +113,10 @@ public class MovToMvnTransformer {
 	 * Execute the transformer.
 	 */
 	public void executeDirProjectGroup() throws TransformerException {
-		// Sort the plugins
 		sortPlugins();
 
 		// Go through all plugins and execute them one by one...
-		for (Plugin plugin : plugins) {
+		for (Plugin plugin : sortedPlugins) {
 			plugin.execute(context);
 		}
 	}
@@ -145,5 +140,15 @@ public class MovToMvnTransformer {
 		File outPath = new File(context.getProjectWorkDirectory());
 
 		unzipper.unzipFileToDir(archiveFile, outPath);
+	}
+
+	/**
+	 * Sort the plugins.
+	 */
+	private void sortPlugins() {
+		// Sort the plugins after getExecutionOrderedNumber
+		this.sortedPlugins = new Plugin[plugins.size()];
+		this.plugins.toArray(sortedPlugins);
+		Arrays.sort(sortedPlugins);
 	}
 }
