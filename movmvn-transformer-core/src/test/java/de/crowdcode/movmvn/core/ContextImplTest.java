@@ -69,12 +69,12 @@ public class ContextImplTest {
 	public void testGetProjectNameDirectory() {
 		Context context = new ContextImpl();
 		context.setProjectWorkDirectory("target/tmp");
-		context.setZipFile("src/test/resources/de/crowdcode/movmvn/cli/testantproject/extra-dataplugin");
+		context.setDirectory("src/test/resources/de/crowdcode/movmvn/cli/testantproject/extra-dataplugin");
 
 		String projectName = context.getProjectName();
 		assertEquals("extra-dataplugin", projectName);
 
-		context.setZipFile("D:\\LDaten\\git\\antmvntransf\\antmvn-transformer-cli\\src\\test\\resources\\de\\crowdcode\\movmvn\\cli\\testantproject\\extra-dataplugin");
+		context.setDirectory("D:\\LDaten\\git\\antmvntransf\\antmvn-transformer-cli\\src\\test\\resources\\de\\crowdcode\\movmvn\\cli\\testantproject\\extra-dataplugin");
 		projectName = context.getProjectName();
 		assertEquals("extra-dataplugin", projectName);
 	}
@@ -83,7 +83,7 @@ public class ContextImplTest {
 	public void testGetProjectSourceNameDirectory() {
 		Context context = new ContextImpl();
 		context.setProjectWorkDirectory("target/tmp");
-		context.setZipFile("src/test/resources/de/crowdcode/movmvn/cli/testantproject/extra-dataplugin");
+		context.setDirectory("src/test/resources/de/crowdcode/movmvn/cli/testantproject/extra-dataplugin");
 
 		String projectSourceName = context.getProjectSourceName();
 		assertEquals("target/tmp/extra-dataplugin", projectSourceName);
@@ -93,7 +93,7 @@ public class ContextImplTest {
 	public void testGetProjectTargetNameDirectory() {
 		Context context = new ContextImpl();
 		context.setProjectWorkDirectory("target/tmp");
-		context.setZipFile("src/test/resources/de/crowdcode/movmvn/cli/testantproject/extra-dataplugin");
+		context.setDirectory("src/test/resources/de/crowdcode/movmvn/cli/testantproject/extra-dataplugin");
 
 		String projectTargetName = context.getProjectTargetName();
 		assertEquals("target/tmp/target/extra-dataplugin", projectTargetName);

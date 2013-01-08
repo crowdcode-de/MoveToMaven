@@ -93,6 +93,10 @@ public class ContextImpl implements Context {
 			return nameResult;
 		} else if (directory != null && !directory.equals("")) {
 			String nameResult = StringUtils.substringAfterLast(directory, "/");
+			if (nameResult.equals("")) {
+				// We have no "/" instead "\\"
+				nameResult = StringUtils.substringAfterLast(directory, "\\");
+			}
 			return nameResult;
 		} else {
 			return "";
