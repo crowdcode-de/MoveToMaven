@@ -15,7 +15,6 @@ rem See the License for the specific language governing permissions and
 rem limitations under the License.
 
 rem if "%MOVMVN_HOME%" == "" goto env_undefined
-if "%MOVMVN_HOME%" == "" set MOVMVN_HOME="..\movmvn-cli"
 
 :logo
 echo MoveToMaven Version 1.0.0-SNAPSHOT 
