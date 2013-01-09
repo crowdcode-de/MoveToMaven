@@ -93,14 +93,13 @@ public class TransformerExecutor {
 		// Input: the project working directory
 		String dir = args[1];
 		String projectWorkDirectory = args[2];
-		log.info("Move To Maven Transformer - Projects Group Directory: "
-				+ dir + " - " + "Project working directory: "
-				+ projectWorkDirectory);
+		log.info("Move To Maven Transformer - Projects Group Directory: " + dir
+				+ " - " + "Project working directory: " + projectWorkDirectory);
 
 		// Get the injected context object
 		Context context = movToMvnTransformer.getContext();
 		context.setProjectWorkDirectory(projectWorkDirectory);
-		context.setDirectory(dir);
+		context.setGroupDirectory(dir);
 		log.info("Project name: " + context.getProjectName());
 		log.info("Project sourcename: " + context.getProjectSourceName());
 		log.info("Project targetname: " + context.getProjectTargetName());
@@ -119,8 +118,7 @@ public class TransformerExecutor {
 		String dir = args[1];
 		String projectWorkDirectory = args[2];
 		log.info("Move To Maven Transformer - Project Directory: " + dir
-				+ " - " + "Project working directory: "
-				+ projectWorkDirectory);
+				+ " - " + "Project working directory: " + projectWorkDirectory);
 
 		// Get the injected context object
 		Context context = movToMvnTransformer.getContext();

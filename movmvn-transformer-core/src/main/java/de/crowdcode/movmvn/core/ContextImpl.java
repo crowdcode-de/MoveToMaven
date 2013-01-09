@@ -34,6 +34,7 @@ public class ContextImpl implements Context {
 	private String projectWorkDirectory;
 	private String zipFile;
 	private String directory;
+	private String groupDirectory;
 
 	/**
 	 * {@inheritDoc}
@@ -108,9 +109,16 @@ public class ContextImpl implements Context {
 	 */
 	@Override
 	public String getProjectSourceName() {
-		String resultName = projectWorkDirectory.concat("/").concat(
-				getProjectName());
-		return resultName;
+		if (groupDirectory != null && !groupDirectory.equals("")) {
+			String resultName = projectWorkDirectory.concat("/")
+					.concat(getGroupDirectoryName()).concat("/")
+					.concat(getProjectName());
+			return resultName;
+		} else {
+			String resultName = projectWorkDirectory.concat("/").concat(
+					getProjectName());
+			return resultName;
+		}
 	}
 
 	/**
@@ -137,5 +145,33 @@ public class ContextImpl implements Context {
 	@Override
 	public String getDirectory() {
 		return this.directory;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setGroupDirectory(String groupDirectory) {
+		this.groupDirectory = groupDirectory;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getGroupDirectory() {
+		return this.groupDirectory;
+	}
+
+	private String getGroupDirectoryName() {
+		String nameResult = StringUtils.substringAfterLast(this.groupDirectory,
+				"/");
+		if (nameResult.equals("")) {
+			// We have no "/" instead "\\"
+			nameResult = StringUtils.substringAfterLast(this.groupDirectory,
+					"\\");
+		}
+
+		return nameResult;
 	}
 }

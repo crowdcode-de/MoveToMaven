@@ -84,6 +84,27 @@ public class ContextImplTest {
 	}
 
 	@Test
+	public void testGetProjectNameGroupDirectory() {
+		Context context = new ContextImpl();
+		context.setProjectWorkDirectory("target/tmp");
+		context.setGroupDirectory("src/test/resources/de/crowdcode/movmvn/cli/testantproject");
+		context.setDirectory("src/test/resources/de/crowdcode/movmvn/cli/testantproject/extra-dataplugin");
+
+		String projectName = context.getProjectName();
+		assertEquals("extra-dataplugin", projectName);
+
+		context.setDirectory("D:\\LDaten\\git\\antmvntransf\\antmvn-transformer-cli\\src\\test\\resources\\de\\crowdcode\\movmvn\\cli\\testantproject");
+		context.setDirectory("D:\\LDaten\\git\\antmvntransf\\antmvn-transformer-cli\\src\\test\\resources\\de\\crowdcode\\movmvn\\cli\\testantproject\\extra-dataplugin");
+		projectName = context.getProjectName();
+		assertEquals("extra-dataplugin", projectName);
+
+		context.setDirectory("D:/progjava/movmvn-transformer-cli-1.0.0-SNAPSHOT/examples/root-directory");
+		context.setDirectory("D:/progjava/movmvn-transformer-cli-1.0.0-SNAPSHOT/examples/root-directory/amis-webapp");
+		projectName = context.getProjectName();
+		assertEquals("amis-webapp", projectName);
+	}
+
+	@Test
 	public void testGetProjectSourceNameDirectory() {
 		Context context = new ContextImpl();
 		context.setProjectWorkDirectory("target/tmp");
@@ -99,6 +120,29 @@ public class ContextImplTest {
 		context.setDirectory("D:/progjava/movmvn-transformer-cli-1.0.0-SNAPSHOT/examples/root-directory/amis-webapp");
 		projectSourceName = context.getProjectSourceName();
 		assertEquals("target/tmp/amis-webapp", projectSourceName);
+	}
+
+	@Test
+	public void testGetProjectSourceNameGroupDirectory() {
+		Context context = new ContextImpl();
+		context.setProjectWorkDirectory("target/tmp");
+		context.setGroupDirectory("src/test/resources/de/crowdcode/movmvn/cli/testantproject");
+		context.setDirectory("src/test/resources/de/crowdcode/movmvn/cli/testantproject/extra-dataplugin");
+
+		String projectSourceName = context.getProjectSourceName();
+		assertEquals("target/tmp/testantproject/extra-dataplugin",
+				projectSourceName);
+
+		context.setGroupDirectory("D:\\LDaten\\git\\antmvntransf\\antmvn-transformer-cli\\src\\test\\resources\\de\\crowdcode\\movmvn\\cli\\testantproject");
+		context.setDirectory("D:\\LDaten\\git\\antmvntransf\\antmvn-transformer-cli\\src\\test\\resources\\de\\crowdcode\\movmvn\\cli\\testantproject\\extra-dataplugin");
+		projectSourceName = context.getProjectSourceName();
+		assertEquals("target/tmp/testantproject/extra-dataplugin",
+				projectSourceName);
+
+		context.setGroupDirectory("D:/progjava/movmvn-transformer-cli-1.0.0-SNAPSHOT/examples/root-directory");
+		context.setDirectory("D:/progjava/movmvn-transformer-cli-1.0.0-SNAPSHOT/examples/root-directory/amis-webapp");
+		projectSourceName = context.getProjectSourceName();
+		assertEquals("target/tmp/root-directory/amis-webapp", projectSourceName);
 	}
 
 	@Test

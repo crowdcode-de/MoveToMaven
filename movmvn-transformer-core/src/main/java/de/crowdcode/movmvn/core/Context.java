@@ -81,6 +81,22 @@ public interface Context {
 	public String getDirectory();
 
 	/**
+	 * Set the directory project group which contains more than one project to
+	 * be worked with.
+	 * 
+	 * @param groupDirectory
+	 *            the directory of the group
+	 */
+	public void setGroupDirectory(String groupDirectory);
+
+	/**
+	 * Get the directory project group which contains more than one project.
+	 * 
+	 * @return the directory of group with its complete directory
+	 */
+	public String getGroupDirectory();
+
+	/**
 	 * Get the project name.
 	 * 
 	 * @return the name of the project
