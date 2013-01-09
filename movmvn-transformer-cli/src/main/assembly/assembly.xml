@@ -11,7 +11,12 @@
 		<fileSet>
 			<directory>src/main/bin</directory>
 			<outputDirectory>/bin</outputDirectory>
-			<filtered>true</filtered>
+			<filtered>false</filtered>
+		</fileSet>
+		<fileSet>
+			<directory>src/main/conf</directory>
+			<outputDirectory>/bin</outputDirectory>
+			<filtered>false</filtered>
 		</fileSet>
 		<fileSet>
 			<directory>src/main/plugins</directory>
