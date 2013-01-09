@@ -15,7 +15,7 @@
 		</fileSet>
 		<fileSet>
 			<directory>src/main/conf</directory>
-			<outputDirectory>/bin</outputDirectory>
+			<outputDirectory>/conf</outputDirectory>
 			<filtered>false</filtered>
 		</fileSet>
 		<fileSet>
