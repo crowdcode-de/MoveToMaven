@@ -14,7 +14,7 @@ rem WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 rem See the License for the specific language governing permissions and
 rem limitations under the License.
 
-rem if "%MOVMVN_HOME%" == "" goto env_undefined
+if "%MOVMVN_HOME%" == "" goto env_undefined
 
 :logo
 echo MoveToMaven Version 1.0.0-SNAPSHOT 
