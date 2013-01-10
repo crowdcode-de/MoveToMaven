@@ -53,7 +53,7 @@ set HEAP_MX=-Xmx1024m
 if "%JAVA_OPTS%" == "" set JAVA_OPTS=%HEAP_MS% %HEAP_MX%
 
 rem call Java
-%_JAVA% %JAVA_OPTS% -classpath %MOVMVN_HOME%\conf\config.properties;%MOVMVN_HOME%\plugins\*;%MOVMVN_HOME%\lib\* de.crowdcode.movmvn.cli.TransformerExecutor %1 %2 %3
+%_JAVA% %JAVA_OPTS% -classpath %MOVMVN_HOME%\conf;%MOVMVN_HOME%\plugins\*;%MOVMVN_HOME%\lib\* de.crowdcode.movmvn.cli.TransformerExecutor %1 %2 %3
 goto end
 
 :exit
