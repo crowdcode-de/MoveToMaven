@@ -160,4 +160,13 @@ public class MovToMvnTransformer {
 		this.plugins.toArray(sortedPlugins);
 		Arrays.sort(sortedPlugins);
 	}
+
+	public void executeDirProjectRestructure() throws TransformerException {
+		sortPlugins();
+
+		// Go through all plugins and execute them one by one...
+		for (Plugin plugin : sortedPlugins) {
+			plugin.execute(context);
+		}
+	}
 }

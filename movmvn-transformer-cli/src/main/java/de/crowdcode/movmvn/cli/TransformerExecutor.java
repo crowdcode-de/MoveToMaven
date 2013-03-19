@@ -33,7 +33,6 @@ import com.google.inject.Module;
 import de.crowdcode.movmvn.core.Context;
 import de.crowdcode.movmvn.core.MovToMvnTransformer;
 import de.crowdcode.movmvn.core.MovToMvnTransformerModule;
-import de.crowdcode.movmvn.plugin.general.GeneralPluginModule;
 
 /**
  * Executor for transformer.
@@ -52,7 +51,8 @@ public class TransformerExecutor {
 	 *            arguments for CLI.
 	 */
 	public static void main(final String[] args) {
-		// Parameter arg[0] = -zip or -dirProject or -dirProjectGroup
+		// Parameter arg[0] = -zip or -dirProject or -dirProjectGroup or
+		// -dirProjectRestructure
 		// Parameter arg[1] = zip or directory name
 		// Parameter arg[2] = working directory
 		TransformerHelper transformerHelper = new TransformerHelper();
@@ -68,7 +68,6 @@ public class TransformerExecutor {
 
 		// Create injectors for the transformer and all the plugins!
 		moduleObjects.add(new MovToMvnTransformerModule());
-		moduleObjects.add(new GeneralPluginModule());
 		Injector injector = Guice.createInjector(moduleObjects);
 
 		MovToMvnTransformer movToMvnTransformer = injector
@@ -80,9 +79,30 @@ public class TransformerExecutor {
 			executeWithDirProject(args, movToMvnTransformer);
 		} else if (args[0].equals("-dirProjectGroup")) {
 			executeWithDirProjectGroup(args, movToMvnTransformer);
+		} else if (args[0].equals("-dirProjectRestructure")) {
+			executeWithDirProjectRestructure(args, movToMvnTransformer);
 		} else {
 			log.log(Level.SEVERE,
 					"Error: please use following format as an example: movmvn-cli -zip C:/temp/extra-dataplugin.zip C:/temp/result");
+		}
+	}
+
+	private static void executeWithDirProjectRestructure(String[] args,
+			MovToMvnTransformer movToMvnTransformer) {
+		// Input: the dir of the project - ONLY ONE project
+		String dir = args[1];
+		log.info("Move To Maven Transformer - Project Directory: " + dir);
+
+		// Get the injected context object
+		Context context = movToMvnTransformer.getContext();
+		context.setDirectory(dir);
+		log.info("Project name: " + context.getProjectName());
+		log.info("Project dir: " + context.getDirectory());
+
+		try {
+			movToMvnTransformer.executeDirProjectRestructure();
+		} catch (TransformerException e) {
+			log.log(Level.SEVERE, e.getLocalizedMessage(), e);
 		}
 	}
 
